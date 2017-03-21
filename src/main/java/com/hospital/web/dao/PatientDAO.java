@@ -1,7 +1,6 @@
 package com.hospital.web.dao;
 
 import org.springframework.stereotype.Component;
-
 import com.hospital.web.domain.PatientDTO;
 @Component
 public interface PatientDAO {
