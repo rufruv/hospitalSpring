@@ -14,27 +14,27 @@ $(function() {
 	patGnb.addClass('gnb width_full_size').css('font-size','15px').css('height','38%');
 	patGnb.find('li:nth-child(1)').click(function() {
 		alert('테스트 : 홈으로 클릭!');
-		goPage('${context}/home.do', 'move', 'main');
+		goPage('${context.path}/home', 'move', 'main');
 	});
 	
 	patGnb.find('li:nth-child(2)').click(function() {
 		alert('테스트 : 마이페이지!');
-		goPage('${context}/patient.do', 'mypage', 'detail');
+		goPage('${context.path}/patient.do', 'mypage', 'detail');
 	});
 	
 	patGnb.find('li:nth-child(3)').click(function() {
 		alert('테스트 : 진료기록!');
-		goPage('${context}/patient.do', 'move', 'treatmentList');
+		goPage('${context.path}/patient.do', 'move', 'treatmentList');
 	});
 
 	patGnb.find('li:nth-child(4)').click(function() {
 		alert('테스트 : 자유게시판');
-		goPage('${context}/board.do', 'move', 'articleList');
+		goPage('${context.path}/board.do', 'move', 'articleList');
 	});
 
 	patGnb.find('li:nth-child(5)').click(function() {
 		alert('테스트 : 로그아웃');
-		goPage('${context}/home.do', 'logout', 'main');
+		goPage('${context.path}/home.do', 'logout', 'main');
 	});
 });
 </script>

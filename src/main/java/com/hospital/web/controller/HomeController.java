@@ -21,13 +21,8 @@ public class HomeController {
 	// @Autowired ContextDTO context;
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String index(HttpSession session) {
-		ContextDTO context = new ContextDTO();
-		logger.info("Welcome", "home");
-		context.setPath(Complex.context());
-		context.setCss(Complex.context()+"/resources/css");
-		context.setImg(Complex.context()+"/resources/img");
-		context.setJs(Complex.context()+"/resources/js");
-		session.setAttribute("context", context);
+		logger.info("Welcome {} !!", "home");
+		session.setAttribute("context", Complex.ContextFactory.create());
 		return "index";
 	}
 	@RequestMapping(value="/home")
