@@ -3,6 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="context" value="<%=application.getContextPath() %>"/>
-<%-- <c:set var="img" value="${context}/resources/img"/>
+<c:set var="img" value="${context}/resources/img"/>
 <c:set var="css" value="${context}/resources/css"/>
-<c:set var="js" value="${context}/resources/js"/> --%>
+<c:set var="js" value="${context}/resources/js"/>

@@ -1,39 +1,37 @@
 package com.hospital.web.controller;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
-/**
- * Handles requests for the application home page.
- */
+import com.hospital.web.composite.Complex;
+import com.hospital.web.domain.ContextDTO;
+
 @Controller
+@SessionAttributes("context")
 public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
+	// @Autowired ContextDTO context;
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-		
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-		
-		String formattedDate = dateFormat.format(date);
-		
-		model.addAttribute("hello", "Hello Spring !!" );
-		
-		return "home";
+	public String index(HttpSession session) {
+		ContextDTO context = new ContextDTO();
+		logger.info("Welcome", "home");
+		context.setPath(Complex.context());
+		context.setCss(Complex.context()+"/resources/css");
+		context.setImg(Complex.context()+"/resources/img");
+		context.setJs(Complex.context()+"/resources/js");
+		session.setAttribute("context", context);
+		return "index";
 	}
-	
+	@RequestMapping(value="/home")
+	public String home(){
+		return "common/main";
+	}
 }
