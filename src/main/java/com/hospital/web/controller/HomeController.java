@@ -27,6 +27,6 @@ public class HomeController {
 	}
 	@RequestMapping(value="/home")
 	public String home(){
-		return "common/main";
+		return "public:common/main.tiles";
 	}
 }
