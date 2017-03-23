@@ -1,7 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<jsp:include page="../common/top.jsp"/>
-<jsp:include page="../common/header.jsp"/>
-<jsp:include page="gnb.jsp"/>
+
 <style>
 .pat_detail {text-align: center; margin:0 auto;}
 .pat_detail tr td{border: 1px solid #bbbbbb}

@@ -25,8 +25,9 @@ public class HomeController {
 		session.setAttribute("context", Complex.ContextFactory.create());
 		return "index";
 	}
-	@RequestMapping(value="/home")
+	@RequestMapping(value="/home", method = RequestMethod.GET)
 	public String home(){
-		return "public:common/main.tiles";
+		logger.info("Welcome {} !!", "main");
+		return "public:common/main";
 	}
 }
