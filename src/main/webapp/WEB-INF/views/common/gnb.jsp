@@ -20,27 +20,27 @@ $(function() {
 	
 	commonGnb.find('li:nth-child(1)').click(function(){
 		alert('회원가입 가기');
-		goPage('${context.path}/patient.do','move', 'registerForm');
+		goPage('${context.path}/patient/join');
 	});
 	
 	commonGnb.find('li:nth-child(2)').click(function(){
 		alert('환자 로그인 가기');
-		goPage('${context.path}/patient.do', 'move', 'loginForm');
+		goPage('${context.path}/patient/login');
 	});
 
 	commonGnb.find('li:nth-child(3)').click(function(){
-		alert('스태프 로그인 가기');
-		goPage('${context.path}/staff.do', 'move', 'loginForm');
+		alert('의사 로그인 가기');
+		goPage('${context.path}/doctor/login');
 	});
 
 	commonGnb.find('li:nth-child(4)').click(function(){
 		alert('관리자 로그인 가기');
-		goPage('${context.path}/admin.do', 'move', 'loginForm');
+		goPage('${context.path}/admin/login');
 	});
 	
 	commonGnb.find('li:nth-child(5)').click(function(){
 		alert('게시판 가기');
-		goList('${context.path}/board.do', 'list', 'articleList', '1');
+		goList('${context.path}/board/list');
 	});
 });
 </script>

@@ -8,18 +8,18 @@
       <div>
             <table class="pat_detail">
              	  <tr style="text-align: left;">
-                        <td colspan="5"><div><img src="${img}/common/defaultimg.jpg" alt="" width="160px"/></div></td>
+                        <td colspan="5"><div><img src="${context.img}/common/defaultimg.jpg" alt="" width="160px"/></div></td>
                   </tr>
                   <tr>
                         <td style="width: 60px" rowspan="5"><span style="font-size: 20px">나<br />의<br />정<br />보</span></td>
                         <td style="width: 100px">이름</td>
-                        <td style="width: 150px">${sessionScope.user.patName}</td>
+                        <td style="width: 150px">${name}</td>
                         <td style="width: 100px">직업</td>
                         <td style="width: 150px">${user.patJob}</td>
                   </tr>
                   <tr>
                         <td>생년월일</td>
-                        <td>${requestScope.birth}</td>
+                        <td>${birth}</td>
                         <td>키</td>
                         <td>180cm</td>
                   </tr>
@@ -50,7 +50,7 @@
            <script>
            function docDetail(){
         	   alert('의사ID 클릭');
-        	   location.href="${context}/doctor.do?action=move&page=detail";
+        	   location.href="${context.path}/doctor";
            }
            </script>
 </div>

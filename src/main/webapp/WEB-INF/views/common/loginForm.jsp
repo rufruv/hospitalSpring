@@ -32,7 +32,7 @@ $(function() {
 	var tab = $loginForm.find('table');
 	
 	$('#loginForm input[value=LOGIN]').click(function(event) {
-		$loginForm.attr("action", "${context}/patient.do");
+		$loginForm.attr("action", "${context.path}/patient/login");
 		$loginForm.attr("method", "post");
 		var idVal = tab.find('input[name=id]').val();
 		var pwVal = tab.find('input[name=password]').val();

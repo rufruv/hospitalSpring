@@ -28,6 +28,6 @@ public class HomeController {
 	@RequestMapping(value="/home", method = RequestMethod.GET)
 	public String home(){
 		logger.info("Welcome {} !!", "main");
-		return "public:common/main";
+		return "public:common/container";
 	}
 }
