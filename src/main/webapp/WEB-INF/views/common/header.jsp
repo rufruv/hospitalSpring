@@ -3,6 +3,6 @@
 	<div class="logo_box width_full_size text_center" style="height: 60%">
 		<a href="index.html"><img src="${context.img}/common/index_logo.png" style="margin-top:20px;"></a>
 	</div>
-<%-- <jsp:include page="gnb.jsp"/> --%>
+<jsp:include page="gnb.jsp"/>
 </div>
 	

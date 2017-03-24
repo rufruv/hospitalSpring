@@ -19,12 +19,12 @@
 	</td>
 </tr>
 
-</table>`
+</table>
 <input type="hidden" name="action" value="login"/>
 <input type="hidden" name="page" value="main"/>
 </form>
 </div>
-<jsp:include page="../common/footer.jsp"></jsp:include>
+<jsp:include page="../common/footer.jsp"/>
 <script>
 $(function() {
 	var $loginForm = $('#loginForm');

@@ -4,6 +4,6 @@
 <img src="${context.img}/common/loading.gif" alt="" /> 
 <script>
 $(function() {
-	goPage('${context.path}/home', 'move', 'main');
+	goPage('${context.path}/home');
 });
 </script>

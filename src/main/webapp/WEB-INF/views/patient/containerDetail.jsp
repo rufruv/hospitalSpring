@@ -40,7 +40,7 @@
                         <td>${user.patAddr}</td>
                         <td>주치의</td>
                         <td>
-                        <a onclick="docDetail()" href="#">${user.docID}</a>
+                        <a onclick="docDetail()" href="#">$한석규</a>
                         </td>
                   </tr>
                   
@@ -50,7 +50,7 @@
            <script>
            function docDetail(){
         	   alert('의사ID 클릭');
-        	   location.href="${context.path}/doctor";
+        	   location.href="${context.path}/patient/doctor/han";
            }
            </script>
 </div>

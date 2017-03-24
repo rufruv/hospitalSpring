@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<div style="height: 70px;"></div> 
+<div style="height: 70px;"/>
 <ul id="commonGnb"> 
 		<li><a>회원가입</a></li>
 		<li><a>고객:로그인</a></li>
