@@ -7,7 +7,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8" />
-	<title><tiles:getAsString name="title"/></title>
+	<title><tiles:getAsString name="title" /></title>
 	<link rel="stylesheet" href="${context.css}/hanbit.css" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="${context.js}/patient.js"></script>

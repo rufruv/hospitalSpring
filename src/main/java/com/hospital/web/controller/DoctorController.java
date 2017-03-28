@@ -17,10 +17,9 @@ public class DoctorController {
 		logger.info("DoctorController - goLogin : {} ", "ENTER SUCCESS!");
 		return "public:common/loginForm";
 	}
-	@RequestMapping("/detail/{docID}")
+	/*@RequestMapping("/detail/{docID}")
 	public String detail(@PathVariable String docID){
 		logger.info("DoctorController - goLogin : {} ", "ENTER SUCCESS!");
-		
 		return "doctor:doctor/containerDetail";
-	}
+	}*/
 }

@@ -36,7 +36,7 @@
 			<td colspan="3"class="text_right"><span><a href="admin.html" class="text_no_underline">To List ▶</a></span></td>
 		</tr>
 		<tr>
-			<td rowspan="3" style="width:150px; height:150px"><img src="../images/doc_img.png" style="width:150px; height:150px" class="margin_center"/></td>
+			<td rowspan="3" style="width:150px; height:150px"><img src="${context.img}/common/doc_img.png" style="width:150px; height:150px" class="margin_center"/></td>
 			<td style="height:50px; padding-left:10px;">의사 ID</td>
 			<td style="height:50px; padding-left:10px;">00601</td>
 			

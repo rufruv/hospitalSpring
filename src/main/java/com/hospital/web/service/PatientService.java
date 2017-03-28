@@ -16,4 +16,5 @@ public interface PatientService {
 		public String getBirth(String patJumin);
 		public String getAge(String patJumin);
 		public PatientDTO getSession();
+		public int count() throws Exception;
 }

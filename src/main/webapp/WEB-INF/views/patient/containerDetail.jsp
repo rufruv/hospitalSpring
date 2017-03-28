@@ -15,7 +15,7 @@
                         <td style="width: 100px">이름</td>
                         <td style="width: 150px">${name}</td>
                         <td style="width: 100px">직업</td>
-                        <td style="width: 150px">${user.patJob}</td>
+                        <td style="width: 150px">${job}</td>
                   </tr>
                   <tr>
                         <td>생년월일</td>
@@ -25,22 +25,22 @@
                   </tr>
                   <tr>
                         <td>성별</td>
-                        <td>${user.patGen}</td>
+                        <td>${gen}</td>
                         <td>나이/몸무게</td>
                         <td>${requestScope.age}/80kg</td>
                   </tr>
                   <tr>
                         <td>전화번호</td>
-                        <td>${user.patPhone}</td>
+                        <td>${phoneNO}</td>
                         <td>혈액형</td>
                         <td>A형</td>
                   </tr>
                   <tr>
                         <td>주소</td>
-                        <td>${user.patAddr}</td>
+                        <td>${addr}</td>
                         <td>주치의</td>
                         <td>
-                        <a onclick="docDetail()" href="#">$한석규</a>
+                        <a onclick="docDetail()" href="#">${doctor}</a>
                         </td>
                   </tr>
                   

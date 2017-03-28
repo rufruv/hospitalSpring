@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<div style="height: 70px;"/>
+<div id="div"></div>
 <ul id="commonGnb"> 
 		<li><a>회원가입</a></li>
 		<li><a>고객:로그인</a></li>
@@ -11,11 +11,12 @@
 			<span class="tooltiptext">구현되지 않은 기능입니다.</span>
 		</li>	
 </ul>
-
 <script>
-$(function() {                 
-	var commonGnb=$('#commonGnb');
+$(function() {  
+	var div=$('#div');
+	div.css('height','70px');
 	
+	var commonGnb=$('#commonGnb');
 	commonGnb.addClass('gnb').addClass('width_full_size').addClass('text_center').css('font-size','15px').css('height','7%');
 	
 	commonGnb.find('li:nth-child(1)').click(function(){
