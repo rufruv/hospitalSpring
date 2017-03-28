@@ -15,7 +15,17 @@ import com.hospital.web.domain.PatientDTO;
 import com.hospital.web.mapper.PatientMapper;
 import com.hospital.web.service.ExistService;
 import com.hospital.web.service.PatientService;
-
+/**
+ * =====================================
+ * @file: Patient Controller
+ * @date: 2017-03-28
+ * @author: Jeon YH
+ * @story:
+ * @method:
+ * join()
+ * login()
+ * =====================================
+ * */
 @Controller
 @RequestMapping("/patient")
 public class PatientController {
@@ -24,12 +34,12 @@ public class PatientController {
 	@Autowired PatientDTO patient;
 	@Autowired PatientMapper mapper;
 	@RequestMapping("/join")
-	public String goJoin(){
+	public String Join(){
 		logger.info("PatientController - goJoin : {} ", "ENTER SUCCESS!");
 		return "public:patient/registerForm";
 	}
 	@RequestMapping("/login")
-	public String goLogin(){
+	public String Login(){
 		logger.info("PatientController - goLogin : {} ", "ENTER SUCCESS!");
 		return "public:common/loginForm";
 	}
