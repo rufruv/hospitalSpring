@@ -24,7 +24,6 @@
 <input type="hidden" name="page" value="main"/>
 </form>
 </div>
-<jsp:include page="../common/footer.jsp"/>
 <script>
 $(function() {
 	var $loginForm = $('#loginForm');
