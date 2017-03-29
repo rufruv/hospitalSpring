@@ -1,11 +1,8 @@
-package com.hospital.web.controller;
-
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+/*package com.hospital.web.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -17,9 +14,9 @@ public class DoctorController {
 		logger.info("DoctorController - goLogin : {} ", "ENTER SUCCESS!");
 		return "public:common/loginForm";
 	}
-	/*@RequestMapping("/detail/{docID}")
+	@RequestMapping("/detail/{docID}")
 	public String detail(@PathVariable String docID){
 		logger.info("DoctorController - goLogin : {} ", "ENTER SUCCESS!");
 		return "doctor:doctor/containerDetail";
-	}*/
-}
+	}
+}*/

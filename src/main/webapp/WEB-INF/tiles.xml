@@ -21,4 +21,24 @@
 	<definition name="patient:*/*" extends="patient">
 		<put-attribute name="container" value="/WEB-INF/views/{1}/{2}.jsp"/>
 	</definition>
+	<definition name="doctor" template="/WEB-INF/views/layout/doctor.jsp">
+		<put-attribute name="title" value="한빛병원"/>
+		<put-attribute name="header" value="/WEB-INF/views/common/header.jsp"/>
+		<put-attribute name="gnb" value="/WEB-INF/views/doctor/gnb.jsp"/>
+		<put-attribute name="container" value=""/>
+		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp"/>
+	</definition>
+	<definition name="doctor:*/*" extends="doctor">
+		<put-attribute name="container" value="/WEB-INF/views/{1}/{2}.jsp"/>
+	</definition>
+	<definition name="nurse" template="/WEB-INF/views/layout/nurse.jsp">
+		<put-attribute name="title" value="한빛병원"/>
+		<put-attribute name="header" value="/WEB-INF/views/common/header.jsp"/>
+		<put-attribute name="gnb" value="/WEB-INF/views/nurse/gnb.jsp"/>
+		<put-attribute name="container" value=""/>
+		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp"/>
+	</definition>
+	<definition name="nurse:*/*" extends="nurse">
+		<put-attribute name="container" value="/WEB-INF/views/{1}/{2}.jsp"/>
+	</definition>
 </tiles-definitions>

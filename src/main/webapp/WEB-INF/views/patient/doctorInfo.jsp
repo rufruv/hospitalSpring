@@ -19,7 +19,6 @@
 			<td rowspan="3" style="width:150px; height:150px"><img src="${context.img}/common/doc_img.png" style="width:150px; height:150px" class="margin_center"/></td>
 			<td style="height:50px; padding-left:10px;">의사 ID</td>
 			<td style="height:50px; padding-left:10px;">00601</td>
-			
 		</tr>
 		<tr>
 			<td style="height:50px; padding-left:10px;">전 공</td>
