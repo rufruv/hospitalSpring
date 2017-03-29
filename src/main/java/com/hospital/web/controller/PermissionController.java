@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.hospital.web.domain.Doctor;
 import com.hospital.web.domain.Info;
+import com.hospital.web.domain.Nurse;
 import com.hospital.web.domain.Patient;
 import com.hospital.web.domain.Person;
 import com.hospital.web.domain.Schema;
@@ -74,7 +75,7 @@ public class PermissionController {
 
 					@Override
 					public Object execute(Object o) throws Exception {
-						return mapper.findPatient((HashMap<?, ?>) map);
+						return mapper.findPatient(map);
 					}
 				};
 				patient = (Patient) service.execute(patient);
@@ -124,7 +125,7 @@ public class PermissionController {
 
 					@Override
 					public Object execute(Object o) throws Exception {
-						return mapper.findDoctor((HashMap<?, ?>) docMap);
+						return mapper.findDoctor(docMap);
 					}
 				};
 				doctor = (Doctor) service.execute(doctor);
@@ -140,7 +141,51 @@ public class PermissionController {
 				}
 			}
 			break;
-		case "nurse":break;
+		case "nurse":
+			Person<?> nurPerson = new Person<Info>(new Nurse());
+			Nurse nurse = (Nurse) nurPerson.getInfo();
+			nurse.setId(id);
+			nurse.setPass(password);
+			Map<String, Object> nurMap = new HashMap<>();
+			nurMap.put("group", nurse.getGroup());
+			nurMap.put("key", Schema.NURSE.getName());
+			nurMap.put("value", id);
+			CRUD.Service nurEx = new CRUD.Service() {
+
+				@Override
+				public Object execute(Object o) throws Exception {
+					logger.info("===ID ? : {}===", o);
+					return mapper.exist(nurMap);
+				}
+			};
+			Integer nurCount = (Integer) nurEx.execute(id);
+			logger.info("ID exist? : {}", nurCount);
+
+			if (nurCount == 0) {
+				logger.info("DB RESULT : {}", "ID not exist");
+				movePlace = "public:common/loginForm";
+			} else {
+
+				CRUD.Service service = new CRUD.Service() {
+
+					@Override
+					public Object execute(Object o) throws Exception {
+						return mapper.findNurse(nurMap);
+					}
+				};
+				nurse = (Nurse) service.execute(nurse);
+
+				if (nurse.getPass().equals(password)) {
+					logger.info("DB RESULT : {}", "success");
+					session.setAttribute("permission", nurse);
+					model.addAttribute("nurse", nurse);
+					movePlace = "nurse:nurse/containerDetail";
+				} else {
+					logger.info("DB RESULT : {}", "password not match");
+					movePlace = "public:common/loginForm";
+				}
+			}
+			break;
 
 		default:
 			break;
@@ -150,7 +195,8 @@ public class PermissionController {
 
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
+		logger.info("logout : {}", "로그아웃 들어왔니?????????????????");
 		session.invalidate(); // invalidate는 sesstion에 있는걸 지운다.
-		return "/redirect:/"; // "/"로 redirect하라! (HomeController 참조!)
+		return "redirect:/"; // "/"로 redirect하라! (HomeController 참조!)
 	}
 }

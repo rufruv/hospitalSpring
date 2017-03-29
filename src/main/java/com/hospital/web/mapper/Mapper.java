@@ -14,9 +14,9 @@ public interface Mapper {
 	public int registPatient(Patient patient) throws Exception;
 	public int registDoctor(Doctor doctor) throws Exception;
 	public int registNurse(Nurse nurse) throws Exception;
-	public Patient findPatient(HashMap<?,?>map) throws Exception;
-	public Doctor findDoctor(HashMap<?,?>map) throws Exception;
-	public Nurse findNurse(HashMap<?,?>map) throws Exception;
+	public Patient findPatient(Map<?,?>map) throws Exception;
+	public Doctor findDoctor(Map<?,?>map) throws Exception;
+	public Nurse findNurse(Map<?,?>map) throws Exception;
 	public List<Patient> findPatients(Map<?,?>map) throws Exception;
 	public List<Doctor> findDoctors(Map<?,?>map) throws Exception;
 	public List<Nurse> findNurses(Map<?,?>map) throws Exception;

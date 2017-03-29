@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <div style="height: 70px;"></div>
-<ul id="patGnb">		
+<ul id="nurGnb">		
 		<li><a>홈으로</a></li>
 		<li><a>마이페이지</a></li>
 		<li><a>진료기록</a></li>
@@ -9,7 +9,7 @@
 </ul>
 <script>
 $(function() {
-	var patGnb=$('#patGnb');
+	var patGnb=$('#nurGnb');
 	
 	patGnb.addClass('gnb width_full_size').css('font-size','15px').css('height','38%');
 	patGnb.find('li:nth-child(1)').click(function() {
@@ -34,7 +34,7 @@ $(function() {
 
 	patGnb.find('li:nth-child(5)').click(function() {
 		alert('테스트 : 로그아웃');
-		goPage('${context.path}/home.do', 'logout', 'main');
+		goPage('${context.path}/logout');
 	});
 });
 </script>

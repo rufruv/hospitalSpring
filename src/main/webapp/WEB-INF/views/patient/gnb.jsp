@@ -34,7 +34,7 @@ $(function() {
 
 	patGnb.find('li:nth-child(5)').click(function() {
 		alert('테스트 : 로그아웃');
-		goPage('${context.path}/home.do', 'logout', 'main');
+		goPage('${context.path}/logout');
 	});
 });
 </script>
