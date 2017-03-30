@@ -21,7 +21,7 @@ import com.hospital.web.domain.Info;
 import com.hospital.web.domain.Nurse;
 import com.hospital.web.domain.Patient;
 import com.hospital.web.domain.Person;
-import com.hospital.web.domain.Schema;
+import com.hospital.web.domain.Enums;
 import com.hospital.web.mapper.Mapper;
 import com.hospital.web.service.CRUD;
 
@@ -38,7 +38,7 @@ public class PermissionController {
 		return "public:common/loginForm";
 	}
 
-	@RequestMapping(value = "{permission}/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/{permission}/login", method = RequestMethod.POST)
 	public String goLogin(@RequestParam("id") String id, @RequestParam("password") String password,
 			@PathVariable String permission, HttpSession session, Model model) throws Exception {
 		logger.info("Permission - goLogin() {}", "POST");
@@ -53,7 +53,7 @@ public class PermissionController {
 			patient.setPass(password);
 			Map<String, Object> map = new HashMap<>();
 			map.put("group", patient.getGroup());
-			map.put("key", Schema.PATIENT.getName());
+			map.put("key", Enums.PATIENT.getName());
 			map.put("value", id);
 			CRUD.Service ex = new CRUD.Service() {
 
@@ -71,24 +71,19 @@ public class PermissionController {
 				movePlace = "public:common/loginForm";
 			} else {
 
-				CRUD.Service service = new CRUD.Service() {
+				/*CRUD.Service service = new CRUD.Service() {
 
 					@Override
 					public Object execute(Object o) throws Exception {
 						return mapper.findPatient(map);
 					}
-				};
-				patient = (Patient) service.execute(patient);
+				};*/
+				patient = mapper.findPatient(map);
 
 				if (patient.getPass().equals(password)) {
 					logger.info("DB RESULT : {}", "success");
 					session.setAttribute("permission", patient);
-					model.addAttribute("name", patient.getName());
-					model.addAttribute("job", patient.getJob());
-					model.addAttribute("gen", patient.getGen());
-					model.addAttribute("phoneNO", patient.getPhone());
-					model.addAttribute("addr", patient.getAddr());
-					model.addAttribute("doctor", patient.getDocID());
+					model.addAttribute("user", patient);
 					movePlace = "patient:patient/containerDetail";
 				} else {
 					logger.info("DB RESULT : {}", "password not match");
@@ -103,7 +98,7 @@ public class PermissionController {
 			doctor.setPass(password);
 			Map<String, Object> docMap = new HashMap<>();
 			docMap.put("group", doctor.getGroup());
-			docMap.put("key", Schema.DOCTOR.getName());
+			docMap.put("key", Enums.DOCTOR.getName());
 			docMap.put("value", id);
 			CRUD.Service docEx = new CRUD.Service() {
 
@@ -133,7 +128,7 @@ public class PermissionController {
 				if (doctor.getPass().equals(password)) {
 					logger.info("DB RESULT : {}", "success");
 					session.setAttribute("permission", doctor);
-					model.addAttribute("doctor", doctor);
+					model.addAttribute("user", doctor);
 					movePlace = "doctor:doctor/containerDetail";
 				} else {
 					logger.info("DB RESULT : {}", "password not match");
@@ -148,7 +143,7 @@ public class PermissionController {
 			nurse.setPass(password);
 			Map<String, Object> nurMap = new HashMap<>();
 			nurMap.put("group", nurse.getGroup());
-			nurMap.put("key", Schema.NURSE.getName());
+			nurMap.put("key", Enums.NURSE.getName());
 			nurMap.put("value", id);
 			CRUD.Service nurEx = new CRUD.Service() {
 
@@ -178,7 +173,7 @@ public class PermissionController {
 				if (nurse.getPass().equals(password)) {
 					logger.info("DB RESULT : {}", "success");
 					session.setAttribute("permission", nurse);
-					model.addAttribute("nurse", nurse);
+					model.addAttribute("user", nurse);
 					movePlace = "nurse:nurse/containerDetail";
 				} else {
 					logger.info("DB RESULT : {}", "password not match");

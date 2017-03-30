@@ -61,43 +61,55 @@
 		SELECT * FROM ${group} 
 		WHERE
 		<if test="nurID != null">
-			nurID like #{value}
+			nur_id like #{nurID}
 		</if>
 		<if test="docID != null">
-			AND docID like #{doc_id}
+			AND doc_id like #{docID}
 		</if>
 		<if test="name != null">
-			AND name like #{pat_name}
+			pat_name like #{name}
 		</if>
-		<if test="jumin != null">
-			AND name like #{pat_name}
+		<if test="gen != null">
+			pat_gen = #{gen}
 		</if>
 		<if test="addr != null">
-			AND name like #{pat_name}
+			pat_addr like #{addr}
 		</if>
 		<if test="job != null">
-			AND name like #{pat_name}
+			name like #{pat_name}
 		</if>
 	</select>
 	<select id="findDoctors" resultMap="Doctor" parameterType="hashMap">
 		SELECT * FROM ${group} 
 		WHERE
-		<if test="${key} != null">
-			${key} = #{value}
+		<if test="name != null">
+			doc_name like #{name}
+		</if>
+		<if test="gen != null">
+			doc_gen = #{gen}
+		</if>
+		<if test="major != null">
+			major_treat like #{major}
+		</if>
+		<if test="position != null">
+			doc_position like #{position}
 		</if>
 		
 	</select>
 	<select id="findNures" resultMap="Nurse" parameterType="hashMap">
 		SELECT * FROM ${group} 
 		WHERE
-		<if test="state != null">
-			state = #{state}
+		<if test="name != null">
+			nur_name like #{name}
 		</if>
-		<if test="title != null">
-			AND title like #{title}
+		<if test="gen != null">
+			AND nur_gen = #{gen}
 		</if>
-		<if test="author != null and author.name != null">
-			AND author_name like #{author.name}
+		<if test="major != null">
+			major_job like #{major}
+		</if>
+		<if test="position != null">
+			nur_position like #{position}
 		</if>
 	</select>
 	<select id="count" resultType="int">
@@ -110,37 +122,58 @@
 	<update id="updatePatient">
 		UPDATE ${group}
 		<set>
-			<if test="username != null">username=#{username},</if>
-			<if test="password != null">password=#{password},</if>
-			<if test="email != null">email=#{email},</if>
-			<if test="bio != null">bio=#{bio}</if>
+			<if test="nurID != null">nur_id=#{nurID},</if>
+			<if test="docID != null">doc_id=#{docID},</if>
+			<if test="pass != null">pat_pass=#{pass},</if>
+			<if test="name != null">pat_name=#{name},</if>
+			<if test="gen != null">pat_gen=#{gen},</if>
+			<if test="jumin != null">pat_jumin=#{jumin},</if>
+			<if test="addr != null">pat_addr=#{addr}</if>
+			<if test="phone != null">pat_phone=#{phone}</if>
+			<if test="email != null">pat_email=#{email}</if>
+			<if test="job != null">pat_job=#{job}</if>
 		</set>
 		where ${key} = #{value}
 	</update>
 	<update id="updateDoctor">
 		UPDATE ${group}
 		<set>
-			<if test="username != null">username=#{username},</if>
-			<if test="password != null">password=#{password},</if>
-			<if test="email != null">email=#{email},</if>
-			<if test="bio != null">bio=#{bio}</if>
+			<if test="pass != null">doc_pass=#{pass},</if>
+			<if test="name != null">doc_name=#{name},</if>
+			<if test="gen != null">doc_gen=#{gen},</if>
+			<if test="phone != null">doc_phone=#{phone},</if>
+			<if test="email != null">doc_email=#{email},</if>
+			<if test="major != null">major_treat=#{major}</if>
+			<if test="position != null">doc_position=#{position}</if>
 		</set>
 		where ${key} = #{value}
 	</update>
 	<update id="updateNurse">
 		UPDATE ${group}
 		<set>
-			<if test="username != null">username=#{username},</if>
-			<if test="password != null">password=#{password},</if>
-			<if test="email != null">email=#{email},</if>
-			<if test="bio != null">bio=#{bio}</if>
+			<if test="pass != null">nur_pass=#{pass},</if>
+			<if test="major != null">major_job=#{major},</if>
+			<if test="name != null">nur_name=#{name},</if>
+			<if test="gen != null">nur_gen=#{gen},</if>
+			<if test="phone != null">nur_phone=#{phone},</if>
+			<if test="email != null">nur_email=#{email},</if>
+			<if test="position != null">nur_position=#{position}</if>
 		</set>
 		where ${key} = #{value}
 	</update>
+	<delete id="delete" parameterType="hashMap">
+		DELETE FROM ${group} WHERE ${key} = #{value}
+	</delete>
 	
 	
 	
-	<select id="find" resultType="com.hospital.web.domain.Patient">
+	
+	
+	
+	
+	
+	
+	<!-- <select id="find" resultType="com.hospital.web.domain.Patient">
 		
 		SELECT * FROM Patient WHERE id = ‘ACTIVE’
 		
@@ -211,6 +244,6 @@
 		<bind name="pattern" value="'%' + _parameter.getTitle() + '%'" />
 		SELECT * FROM Patient
 		WHERE title LIKE #{pattern}
-	</select>
+	</select> -->
 	
 </mapper>

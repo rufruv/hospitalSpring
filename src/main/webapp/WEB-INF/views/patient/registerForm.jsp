@@ -131,6 +131,10 @@
 				</td>
 			</tr>
 		</table>
+		<input type="radio" name="type" value="patient" checked> 고객
+		<input type="radio" name="type" value="doctor" > 의사
+		<input type="radio" name="type" value="nurse"> 간호사
+		<input type="radio" name="type" value="admin"> 관리자		
 	</form>
 	</div>
 
@@ -142,7 +146,9 @@ $(function() {
 	tab.addClass('width_full_size').addClass('table_default')
 	
 	$('input[name=submitBtn]').click(function() {
-		$registerForm.attr("action", "${context}/patient.do");
+		var type = $registerForm.find(':radio[name=type]:checked').val();
+		alert('type: '+type);
+		$registerForm.attr("action", "${context}/register/"+type);
 		$registerForm.attr("method", "post");
 		/* alert('전송직전'); */
 		$registerForm.submit();
@@ -150,4 +156,3 @@ $(function() {
 	
 });
 </script>
-<jsp:include page="../common/footer.jsp"></jsp:include>

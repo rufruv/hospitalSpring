@@ -11,25 +11,25 @@
 		<tr>
 			<td rowspan="3" style="width:150px; height:150px"><img src="${context.img}/common/doc_img.png" style="width:150px; height:150px" class="margin_center"/></td>
 			<td style="height:50px; padding-left:10px;">의사 ID</td>
-			<td style="height:50px; padding-left:10px;">00601</td>
+			<td style="height:50px; padding-left:10px;">${user.id}</td>
 			
 		</tr>
 		<tr>
 			<td style="height:50px; padding-left:10px;">전 공</td>
-			<td style="height:50px; padding-left:10px;">내 과</td>
+			<td style="height:50px; padding-left:10px;">${user.major}</td>
 		</tr>
 		<tr>
 			<td style="height:50px; padding-left:10px;">성 별</td>
-			<td style="height:50px; padding-left:10px;">M</td>
+			<td style="height:50px; padding-left:10px;">${user.gen}</td>
 		</tr>
 		<tr>
-			<td rowspan="2" class="text_center"><span style="font-size: 17px;"><b>안성기</b></span> 과장</td>
+			<td rowspan="2" class="text_center"><span style="font-size: 17px;"><b>${user.name}</b></span> ${user.position}</td>
 			<td style="height:50px; padding-left:10px;">전 화</td>
-			<td style="height:50px; padding-left:10px;">011-222-0987</td>
+			<td style="height:50px; padding-left:10px;">${user.phone}</td>
 		</tr>
 		<tr>
 			<td style="height:50px; padding-left:10px;">이메일</td>
-			<td style="height:50px; padding-left:10px;">ask@han.com</td>
+			<td style="height:50px; padding-left:10px;">${user.email}</td>
 		</tr>
 		</table>
 		</div>

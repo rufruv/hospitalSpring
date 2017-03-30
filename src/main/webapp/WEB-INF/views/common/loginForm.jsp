@@ -38,8 +38,8 @@ $(function() {
 	$('#loginForm input[value=LOGIN]').click(function(event) {
 		var permission = $loginForm.find(':radio[name=permission]:checked').val();
 		alert('PERMISSION: '+permission);
-		$loginForm.attr("action", "${context.path}/"+permission+"/login");
-		$loginForm.attr("method", "post");
+		$loginForm.attr("action", "${context.path}/"+permission+"/login.info");
+		$loginForm.attr("method", "post"); 
 		var idVal = tab.find('input[name=id]').val();
 		var pwVal = tab.find('input[name=password]').val();
 		if(idVal=='' || pwVal==''){
