@@ -24,9 +24,10 @@ import com.hospital.web.domain.Person;
 import com.hospital.web.domain.Enums;
 import com.hospital.web.mapper.Mapper;
 import com.hospital.web.service.CRUD;
+import com.hospital.web.service.ReadService;
 
 @Controller
-@SessionAttributes("permission") // 주석
+@SessionAttributes("permission") 
 public class PermissionController {
 	private static final Logger logger = LoggerFactory.getLogger(PermissionController.class);
 	@Autowired
@@ -53,31 +54,31 @@ public class PermissionController {
 			patient.setPass(password);
 			Map<String, Object> map = new HashMap<>();
 			map.put("group", patient.getGroup());
-			map.put("key", Enums.PATIENT.getName());
+			map.put("key", Enums.PATIENT.val());
 			map.put("value", id);
-			CRUD.Service ex = new CRUD.Service() {
-
+			/*ReadService exist = new ReadService() {
+				
 				@Override
-				public Object execute(Object o) throws Exception {
-					logger.info("===ID ? : {}===", o);
+				public Object execute(Map<?, ?> map) throws Exception {
 					return mapper.exist(map);
 				}
-			};
-			Integer count = (Integer) ex.execute(id);
+			};*/
+			ReadService exist = (Map<?, ?>paramMap) -> mapper.exist(paramMap); // method를 선언한것 (객체생성은 아님)
+			Integer count = (Integer) exist.execute(map);
 			logger.info("ID exist? : {}", count);
 
 			if (count == 0) {
 				logger.info("DB RESULT : {}", "ID not exist");
 				movePlace = "public:common/loginForm";
 			} else {
-
-				/*CRUD.Service service = new CRUD.Service() {
-
+				/*ReadService findPatient = new ReadService() {
+					
 					@Override
-					public Object execute(Object o) throws Exception {
+					public Object execute(Map<?, ?> map) throws Exception {
 						return mapper.findPatient(map);
 					}
 				};*/
+				ReadService findPatient=(Map<?, ?>paramMap)->mapper.findPatient(paramMap);
 				patient = mapper.findPatient(map);
 
 				if (patient.getPass().equals(password)) {
@@ -98,7 +99,7 @@ public class PermissionController {
 			doctor.setPass(password);
 			Map<String, Object> docMap = new HashMap<>();
 			docMap.put("group", doctor.getGroup());
-			docMap.put("key", Enums.DOCTOR.getName());
+			docMap.put("key", Enums.DOCTOR.val());
 			docMap.put("value", id);
 			CRUD.Service docEx = new CRUD.Service() {
 
@@ -123,6 +124,7 @@ public class PermissionController {
 						return mapper.findDoctor(docMap);
 					}
 				};
+				
 				doctor = (Doctor) service.execute(doctor);
 
 				if (doctor.getPass().equals(password)) {
@@ -143,8 +145,9 @@ public class PermissionController {
 			nurse.setPass(password);
 			Map<String, Object> nurMap = new HashMap<>();
 			nurMap.put("group", nurse.getGroup());
-			nurMap.put("key", Enums.NURSE.getName());
+			nurMap.put("key", Enums.NURSE.val());
 			nurMap.put("value", id);
+			
 			CRUD.Service nurEx = new CRUD.Service() {
 
 				@Override

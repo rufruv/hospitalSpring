@@ -6,7 +6,7 @@ public enum Enums {
 	private Enums(String val) {
 		this.val=val;
 	}
-	public String getName(){
+	public String val(){
 		return val;
 	}
 }
