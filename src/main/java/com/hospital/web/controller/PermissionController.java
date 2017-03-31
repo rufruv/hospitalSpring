@@ -26,7 +26,7 @@ import com.hospital.web.mapper.Mapper;
 import com.hospital.web.service.CRUD;
 
 @Controller
-@SessionAttributes("permission")
+@SessionAttributes("permission") // 주석
 public class PermissionController {
 	private static final Logger logger = LoggerFactory.getLogger(PermissionController.class);
 	@Autowired
