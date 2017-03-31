@@ -194,4 +194,54 @@ public class PermissionController {
 		session.invalidate(); // invalidate는 sesstion에 있는걸 지운다.
 		return "redirect:/"; // "/"로 redirect하라! (HomeController 참조!)
 	}
+	
+	/*@RequestMapping(value="/{permission}/regist", method=RequestMethod.POST)
+	public String regist(@PathVariable String permission,
+			@RequestParam("id") String id,
+			@RequestParam("password") String password,
+			@RequestParam("name") String name,
+			@RequestParam("email") String email,
+			@RequestParam("addr") String addr) throws Exception{
+		logger.info("PermissionController - regist() {} !!", "POST");
+		String movePosition="";
+		switch (permission) {
+		case "patient":
+			Person<?> person = new Person<Info>(new Patient());
+			Patient patient = (Patient) person.getInfo();
+			
+			patient.setId(id);
+			patient.setPass(password);
+			patient.setName(name);
+			patient.setEmail(email);
+			patient.setAddr(addr);
+			Map<String,Object>map=new HashMap<>();
+			map.put("group", patient.getGroup());
+			map.put("id", patient.getId());
+			map.put("pass", patient.getPass());
+			map.put("name", patient.getName());
+			map.put("email", patient.getEmail());
+			map.put("addr", patient.getAddr());
+			map.put("phone", "");
+			map.put("job", "");
+			map.put("gen", "");
+			map.put("nur_id", "");
+			map.put("doc_id", "");
+			map.put("jumin", "");
+			CRUD.Service service = new CRUD.Service() {	
+				@Override
+				public Object execute(Object o) throws Exception {
+					
+					return mapper.registPatient(map);
+				}
+			};
+				service.execute(patient);
+				logger.info("DB 저장한 결과 : {}", "ID exist");
+				movePosition="patient:common/container";
+			break;
+
+		default:
+			break;
+		}
+		return movePosition;
+	}*/
 }

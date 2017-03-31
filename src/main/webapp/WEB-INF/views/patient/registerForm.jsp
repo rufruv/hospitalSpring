@@ -148,7 +148,7 @@ $(function() {
 	$('input[name=submitBtn]').click(function() {
 		var type = $registerForm.find(':radio[name=type]:checked').val();
 		alert('type: '+type);
-		$registerForm.attr("action", "${context}/register/"+type);
+		$registerForm.attr("action", "${context.path}/register/"+type);
 		$registerForm.attr("method", "post");
 		/* alert('전송직전'); */
 		$registerForm.submit();

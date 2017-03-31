@@ -2,6 +2,8 @@ package com.hospital.web.controller;
 
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +21,15 @@ import com.hospital.web.mapper.Mapper;
 @Controller
 public class PersonController {
 	private static final Logger logger = LoggerFactory.getLogger(PersonController.class);
-	Command command;
 	@Autowired Mapper mapper;
 	
 	@RequestMapping(value="/register/{type}",method=RequestMethod.POST)
-	public String register(@PathVariable String type, @RequestBody Map<String,Object>map) throws Exception {
+	public String register(@PathVariable String type, 
+						   @RequestBody Map<String,Object>map,
+						   Command command) throws Exception {
 		logger.info("PersonController register() {}", "OK");
+		logger.info("PersonController @PathVariable-type | @RequestBody map, {}", type, map);
+		
 		if(type.equals("")){type="patient";}
 		map.put("type", type);
 		Person<?> person=command.process(map).getPersonInfo();

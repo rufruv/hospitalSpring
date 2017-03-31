@@ -2,20 +2,65 @@ package com.hospital.web.domain;
 
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
 
+@Component
 interface Orderable{
 	public Command process(Map<?,?>map);
 }
-@Qualifier("command")
+@Component @Lazy
 public class Command implements Orderable{
 	Map<?, ?> map;
 
 	public Command(Map<?,?> map) {
 		this.map = map;
 	}
+	
+	public Person<? extends Info> getPersonInfo(){
+		Person<?> person=null;
+		switch (map.get("type").toString()) {
+		case "patient":
+			person=new Person<Info>(new Patient());
+			Patient patient=(Patient) person.getInfo();
+			patient.setNurID(map.get("nurID").toString());
+			patient.setDocID(map.get("docID").toString());
+			patient.setId(map.get("id").toString());
+			patient.setPass(map.get("pass").toString());
+			patient.setName(map.get("name").toString());
+			patient.setGen(map.get("gen").toString());
+			patient.setJumin(map.get("jumin").toString());
+			patient.setAddr(map.get("addr").toString());
+			patient.setPhone(map.get("phone").toString());
+			patient.setEmail(map.get("email").toString());
+			patient.setJob(map.get("job").toString());
+			break;
+		case "doctor":
+			person=new Person<Info>(new Doctor());
+			Doctor doctor=(Doctor) person.getInfo();
 
+			break;
+		case "nurse":
+			person=new Person<Info>(new Nurse());
+			Nurse nurse=(Nurse) person.getInfo();
+
+			break;
+		case "admin":
+			person=new Person<Info>(new Patient());
+			Admin admin=(Admin) person.getInfo();
+			
+			break;
+		default:
+			break;
+		}
+		return person;
+	}
+	
+	@Override
+	public Command process(Map<?, ?> map) {
+		return new Command(map);
+	}
+	
 	public Integer[] getPageInfo() {
 		Pagination page = new Pagination();
 		String pageNO = (String) map.get("pageNO");
@@ -33,7 +78,6 @@ public class Command implements Orderable{
 		page.setBlockEnd();
 		return page.getAttribute();
 	}
-	
 	class Pagination {
 		private int rowCount, pageNO, pageStart, pageEnd, count, pageCount, blockSize, blockStart, prevBlock, nextBlock,
 				blockEnd;
@@ -87,57 +131,5 @@ public class Command implements Orderable{
 					nextBlock };
 			return arr;
 		}
-	}
-
-	public Person<? extends Info> getPersonInfo(){
-		Person<?> person=null;
-		switch (map.get("type").toString()) {
-		case "patient":
-			person=new Person<Info>(new Patient());
-			Patient patient=(Patient) person.getInfo();
-			patient.setId(map.get("id").toString());
-			patient.setName(map.get("name").toString());
-			patient.setAddr(map.get("addr").toString());
-			patient.setJob(map.get("job").toString());
-			patient.setJumin(map.get("jumin").toString());
-			patient.setEmail(map.get("email").toString());
-			patient.setPass(map.get("pass").toString());
-			patient.setPhone(map.get("phone").toString());
-			break;
-		case "doctor":
-			person=new Person<Info>(new Doctor());
-			Doctor doctor=(Doctor) person.getInfo();
-			doctor.setId(map.get("id").toString());
-			doctor.setName(map.get("name").toString());
-			doctor.setMajor(map.get("major").toString());
-			doctor.setPosition(map.get("position").toString());
-			doctor.setEmail(map.get("email").toString());
-			doctor.setPass(map.get("pass").toString());
-			doctor.setPhone(map.get("phone").toString());
-			break;
-		case "nurse":
-			person=new Person<Info>(new Nurse());
-			Nurse nurse=(Nurse) person.getInfo();
-			nurse.setId(map.get("id").toString());
-			nurse.setName(map.get("name").toString());
-			nurse.setMajor(map.get("major").toString());
-			nurse.setPosition(map.get("position").toString());
-			nurse.setEmail(map.get("email").toString());
-			nurse.setPass(map.get("pass").toString());
-			nurse.setPhone(map.get("phone").toString());
-			break;
-		case "admin":
-			person=new Person<Info>(new Patient());
-			Admin admin=(Admin) person.getInfo();
-			break;
-		default:
-			break;
-		}
-		return person;
-	}
-	
-	@Override
-	public Command process(Map<?, ?> map) {
-		return new Command(map);
 	}
 }
