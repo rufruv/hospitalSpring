@@ -13,6 +13,7 @@ public class Patient extends Info{
 	public String getGroup() {
 		return "Patient";
 	}
+	
 
 	
 }

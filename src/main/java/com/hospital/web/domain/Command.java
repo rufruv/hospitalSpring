@@ -17,6 +17,10 @@ public class Command implements Orderable{
 		this.map = map;
 	}
 	
+	public Command() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public Person<? extends Info> getPersonInfo(){
 		Person<?> person=null;
 		switch (map.get("type").toString()) {
@@ -61,73 +65,184 @@ public class Command implements Orderable{
 		return new Command(map);
 	}
 	
-	public Integer[] getPageInfo() {
+	public Pagination getPageInfo() {
+		System.out.println("##### getPageInfo ENTER####");
 		Pagination page = new Pagination();
-		String pageNO = (String) map.get("pageNO");
-		String count = (String) map.get("count");
-		page.setBlockSize(5);
-		page.setRowCount(5);
-		page.setCount(Integer.parseInt(count));
-		page.setPageNO(pageNO);
-		page.setPageStart();
-		page.setPageEnd();
-		page.setPageCount();
-		page.setBlockStart();
+		int pageNumber=(int) map.get("pageNumber");
+		Integer theNumberOfRows=(Integer) map.get("pageNumber");
+		page.setTheNumberOfRows(theNumberOfRows);
+		page.setPageNumber(pageNumber);
+		page.setStartPage();
+		page.setEndPage();
+		page.setTheNumberOfPages();
+		page.setTheNumberOfBlocks();
+		page.setStartRow();
 		page.setPrevBlock();
 		page.setNextBlock();
-		page.setBlockEnd();
-		return page.getAttribute();
+		page.setEndRow();
+		return page;
 	}
-	class Pagination {
-		private int rowCount, pageNO, pageStart, pageEnd, count, pageCount, blockSize, blockStart, prevBlock, nextBlock,
-				blockEnd;
+	public class Pagination {
+		public static final int PAGE_SIZE=5;
+		public static final int BLOCK_SIZE=5;
+		private int theNumberOfRows,startRow, endRow, theNumberOfPages, theNumberOfBlocks,
+					startPage, prevBlock, nextBlock,endPage, pageNumber;
+	
+		
+		
+		
 
-		public void setRowCount(int rowCount) {
-			this.rowCount = rowCount;
+		public int getTheNumberOfRows() {
+			return theNumberOfRows;
 		}
 
-		public void setPageNO(String pageNO) {
-			this.pageNO = Integer.parseInt(pageNO);
+
+
+
+		public void setTheNumberOfRows(int theNumberOfRows) {
+			this.theNumberOfRows = theNumberOfRows;
 		}
 
-		public void setPageStart() {
-			this.pageStart = (pageNO - 1) * rowCount + 1;
+
+
+
+		public int getPageNumber() {
+			return pageNumber;
 		}
 
-		public void setPageEnd() {
-			this.pageEnd = pageNO * rowCount;
+
+
+
+		public void setPageNumber(int pageNumber) {
+			this.pageNumber = pageNumber;
 		}
 
-		public void setCount(int count) {
-			this.count = count;
+
+
+
+		public int getStartRow() {
+			return startRow;
 		}
 
-		public void setPageCount() {
-			pageCount = (count % rowCount == 0) ? count / rowCount : count / rowCount + 1;
+
+
+
+		public void setStartRow() {
+			this.startRow = (pageNumber-1)*theNumberOfRows+1;
 		}
 
-		public void setBlockSize(int blockSize) {
-			this.blockSize = blockSize;
+
+
+
+		public int getEndRow() {
+			return endRow;
 		}
 
-		public void setBlockStart() {
-			this.blockStart = pageNO - ((pageNO - 1) % blockSize);
+
+
+
+		public void setEndRow() {
+			this.endRow = pageNumber+theNumberOfRows;
 		}
+
+
+
+
+		public int getTheNumberOfPages() {
+			
+			return theNumberOfPages;
+		}
+
+
+
+
+		public void setTheNumberOfPages() {
+			if(theNumberOfRows % PAGE_SIZE == 0){
+				theNumberOfPages=theNumberOfRows / PAGE_SIZE;
+			}else{
+				theNumberOfPages=theNumberOfRows / PAGE_SIZE + 1;
+			}
+		}
+
+
+
+
+		public int getTheNumberOfBlocks() {
+			return theNumberOfBlocks;
+		}
+
+
+
+
+		public void setTheNumberOfBlocks() {
+			this.theNumberOfBlocks = theNumberOfPages / BLOCK_SIZE;
+		}
+
+
+
+
+		public int getStartPage() {
+			return startPage;
+		}
+
+
+
+
+		public void setStartPage() {
+			this.startPage = pageNumber - ((pageNumber-1)%BLOCK_SIZE);
+		}
+
+
+
+
+		public int getPrevBlock() {
+			return prevBlock;
+		}
+
+
+
 
 		public void setPrevBlock() {
-			this.prevBlock = blockStart - blockSize;
+			this.prevBlock = startPage-BLOCK_SIZE;
 		}
+
+
+
+
+		public int getNextBlock() {
+			return nextBlock;
+		}
+
+
+
 
 		public void setNextBlock() {
-			this.nextBlock = blockStart + blockSize;
+			this.nextBlock = startPage+BLOCK_SIZE;
 		}
 
-		public void setBlockEnd() {
-			blockEnd = (blockStart + rowCount - 1 < pageCount) ? blockStart + blockSize - 1 : pageCount;
+
+
+
+		public int getEndPage() {
+			return endPage;
 		}
+
+
+
+
+		public void setEndPage() {
+			if((startPage+theNumberOfRows-1) < theNumberOfPages){
+				endPage = startPage + BLOCK_SIZE;
+			}else{
+				endPage = theNumberOfPages;
+			}
+		}
+
+
+
 
 		public Integer[] getAttribute() {
-			Integer[] arr = { count, pageCount, pageNO, pageStart, pageEnd, blockStart, blockEnd, prevBlock,
+			Integer[] arr = { pageNumber, theNumberOfPages ,startPage, endPage, startRow, endRow, prevBlock,
 					nextBlock };
 			return arr;
 		}

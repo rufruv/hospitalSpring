@@ -1,18 +1,14 @@
 package com.hospital.web.domain;
 
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-@Component @Data
+@Data @Component 
 public class Article {
 	@Getter @Setter
-	private String seq, id, title, contents, regdate, readCount;
+	private String seq, writerId,name, title, content, regDate, readCount;
 
-	
-	@Override
-	public String toString() {
-		return String.format("[ %s | %s | %s | %s | %s ]",seq, id, title, regdate, "0");
-	}
 }

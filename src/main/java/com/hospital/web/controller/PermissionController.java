@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.hospital.web.domain.Doctor;
@@ -26,27 +27,26 @@ import com.hospital.web.mapper.Mapper;
 import com.hospital.web.service.CRUD;
 import com.hospital.web.service.ReadService;
 
-@Controller
-@SessionAttributes("permission") 
+@RestController
 public class PermissionController {
 	private static final Logger logger = LoggerFactory.getLogger(PermissionController.class);
-	@Autowired
-	Mapper mapper;
+	@Autowired Mapper mapper;
 
-	@RequestMapping("/login")
+
+	@RequestMapping("/test/login")
 	public String Login() {
 		logger.info("Permission - goLogin : {} ", "ENTER SUCCESS!");
 		return "public:common/loginForm";
 	}
-
-	@RequestMapping(value = "/{permission}/login", method = RequestMethod.POST)
+	
+	@RequestMapping(value = "/test/{type}/login", method = RequestMethod.POST)
 	public String goLogin(@RequestParam("id") String id, @RequestParam("password") String password,
-			@PathVariable String permission, HttpSession session, Model model) throws Exception {
+			@PathVariable String type, HttpSession session, Model model) throws Exception {
 		logger.info("Permission - goLogin() {}", "POST");
 		logger.info("Permission - id, pw : {}", id + "," + password);
 
 		String movePlace = "";
-		switch (permission) {
+		switch (type) {
 		case "patient":
 			Person<?> person = new Person<Info>(new Patient());
 			Patient patient = (Patient) person.getInfo();
@@ -190,7 +190,7 @@ public class PermissionController {
 		}
 		return movePlace;
 	}
-
+	
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
 		logger.info("logout : {}", "로그아웃 들어왔니?????????????????");

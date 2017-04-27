@@ -36,6 +36,37 @@
 		<result property="major" column="major_job"/>
 		<result property="position" column="nur_position"/>
 	</resultMap>
+	<resultMap id="Chart" type="com.hospital.web.domain.Chart" >
+		<id property="chartId" column="chartId"/>
+		<result property="nurseId" column="nurseId"/>
+		<result property="doctorId" column="doctorId"/>
+		<result property="pass" column="pass"/>
+		<result property="name" column="name"/>
+		<result property="gen" column="gen"/>
+		<result property="jumin" column="jumin"/>
+		<result property="addr" column="addr"/>
+		<result property="phone" column="phone"/>
+		<result property="email" column="email"/>
+		<result property="job" column="job"/>
+		<result property="treatmentId" column="treatmentId"/>
+		<result property="chartContents" column="chartContents"/>
+		<result property="doctorMajor" column="doctorMajor"/>
+		<result property="doctorName" column="doctorName"/>
+		<result property="doctorPosition" column="doctorPosition"/>
+		<result property="nurseName" column="nurseName"/>
+		<result property="nursePosition" column="nursePosition"/>
+		<result property="treatContents" column="treatContents"/>
+		<result property="treatDate" column="treatDate"/>
+	</resultMap>
+	<resultMap id="Article" type="com.hospital.web.domain.Article">
+	  <id property="seq" column="art_seq"/>
+      <result property="writerId" column="writer_id"/>
+      <result property="name" column="name"/>
+      <result property="title" column="title"/>
+      <result property="content" column="content"/>
+      <result property="regDate" column="reg_date"/>
+      <result property="readCount" column="read_count"/>
+	</resultMap> 
 	<insert id="registPatient">
 		INSERT INTO ${group}(pat_id, nur_id, doc_id, pat_pass, pat_name, pat_gen, pat_jumin, pat_addr, pat_phone, pat_email, pat_job) 
 		VALUES (#{id}, #{nurID}, #{docID}, #{pass}, #{name}, #{gen}, #{jumin}, #{addr}, #{phone}, #{email}, #{job})
@@ -47,6 +78,10 @@
 	<insert id="registNurse">
 		INSERT INTO ${group}(nur_id, nur_pass, nur_name, nur_gen, nur_phone, nur_email, major_job, nur_position) 
 		VALUES (#{id}, #{pass}, #{name}, #{gen}, #{phone}, #{email}, #{major}, #{position})
+	</insert>
+	<insert id="registChartFile">
+		INSERT INTO Chart(chart_contents) VALUE (#{file})
+		WHERE chart_id = #{chartId}
 	</insert>
 	<select id="findPatient" resultMap="Patient" parameterType="hashMap">
 		SELECT * FROM ${group} WHERE ${key} = #{value}
@@ -116,8 +151,28 @@
 		SELECT COUNT(*) FROM ${group}
 	</select>
 	<select id="exist" resultType="int" parameterType="hashMap">
-		SELECT
-		COUNT(*) FROM ${group} WHERE ${key} = #{value}
+		SELECT COUNT(*) FROM ${group} WHERE ${idType} = #{id}
+	</select>
+	<select id="findChart" resultMap="com.hospital.web.domain.Chart.java" parameterType="hashMap">
+		SELECT * FROM chartView
+		WHERE patientId = #{id}
+	</select>
+	<select id="articleList" resultMap="Article" parameterType="hashMap">
+		SELECT t2.*
+		FROM(SELECT @ROWNUM := @ROWNUM + 1 AS rownum
+		,t.writer_id
+		,t.title
+		,t.content
+		,t.reg_date
+		,t.read_count
+		,t.art_seq
+		FROM Article t
+		,(SELECT @ROWNUM := 0) R
+			ORDER BY t.reg_date DESC
+			)t2
+			WHERE t2.rownum BETWEEN 1 AND 5
+			ORDER BY t2.rownum ASC;
+			
 	</select>
 	<update id="updatePatient">
 		UPDATE ${group}
@@ -164,7 +219,7 @@
 	<delete id="delete" parameterType="hashMap">
 		DELETE FROM ${group} WHERE ${key} = #{value}
 	</delete>
-	
+
 	
 	
 	

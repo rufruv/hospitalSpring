@@ -10,6 +10,7 @@
 		</li>	
 </ul>
 <script>
+app.context.init('${context}');
 $(function() {  
 	var div=$('#div');
 	div.css('height','70px');
@@ -19,19 +20,20 @@ $(function() {
 	
 	commonGnb.find('li:nth-child(1)').click(function(){
 		alert('회원가입 가기');
-		goPage('${context.path}/patient/join');
+		goPage('${context}/patient/join');
 	});
 	
 	commonGnb.find('li:nth-child(2)').click(function(){
 		alert('로그인 가기');
-		goPage('${context.path}/login');
+		goPage('${context}/login');
 	});
 
 	commonGnb.find('li:nth-child(3)').click(function(){
 		alert('게시판 가기');
-		goList('${context.path}/board/list');
+		goList('${context}/board/list');
 	});
 });
 </script>
+ 	
 
 

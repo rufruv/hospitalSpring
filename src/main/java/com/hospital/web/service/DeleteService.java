@@ -7,4 +7,5 @@ import org.springframework.stereotype.Service;
 @FunctionalInterface
 public interface DeleteService {
 	public int execute(Map<?,?>map) throws Exception;
+	
 }

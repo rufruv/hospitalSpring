@@ -7,11 +7,26 @@ import lombok.Getter;
 import lombok.Setter;
 @Component @Data
 public class Chart {
-	@Getter @Setter
-	private String charID,
-				   treatID,
-				   docID,
-				   patID,
-				   nurID,
-				   chartContents;
+	private String patientId,
+				   nurseId,
+				   doctorId,
+				   pass,
+				   name,
+				   gen,
+				   jumin,
+				   addr,
+				   phone,
+				   email,
+				   job,
+				   chartId,
+				   treatmentId,
+				   chartContents,
+				   doctorMajor,
+				   doctorName,
+				   doctorPosition,
+				   nurseName,
+				   nursePosition,
+				   treatContents,
+				   treatDate;
+	
 }
